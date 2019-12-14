@@ -1,0 +1,54 @@
+#include<iostream>
+using namespace std;
+struct congnhan {
+	string hoten;
+	float hesoluong;
+	float thuong;
+	float luong;
+};
+void nhapdulieu(struct congnhan ds[100], int &n);
+void xuatdulieu(struct congnhan ds[100], int n);
+void luongmoicongnhan(struct congnhan ds[100], int n);
+void sapxep(struct congnhan ds[100], int n);
+int main() {
+	int n;
+	struct congnhan ds[100];
+	nhapdulieu(ds, n );
+
+	luongmoicongnhan(ds, n);
+	sapxep(ds, n);
+}
+void nhapdulieu(struct congnhan ds[100], int& n) {
+	cout << " nhap so cong nhan  ";
+	cin >> n;
+	for (int i = 1;i <= n;i++) {
+		cout << " nhap ten cong nhan ";
+		cin >> ds[i].hoten;
+		cout << " nhap he so luong ";
+		cin >> ds[i].hesoluong;
+		cout << " nhap thuong luong ";
+		cin >> ds[i].thuong;
+	}
+
+}
+void luongmoicongnhan(struct congnhan ds[100], int n) {
+	for (int i = 1;i <= n;i++) {
+		ds[i].luong = ds[i].hesoluong + ds[i].thuong;
+		cout << " luong cua cong nhan " << i << " : " << ds[i].luong<<endl;
+	}
+}
+void sapxep(struct congnhan ds[100], int n) {
+	for (int i = 1;i <= n;i++) {
+		for (int j = i + 1;j <= n;j++) {
+			if (ds[i].hoten < ds[j].hoten) {
+				struct congnhan tg;
+				tg = ds[i];
+				ds[i] = ds[j];
+				ds[j] = tg;
+
+			}
+		}
+		cout << ds[i].hoten << "  " << ds[i].hesoluong << "  " << ds[i].thuong << endl;
+	}
+
+}
