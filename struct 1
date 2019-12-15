@@ -1,0 +1,59 @@
+#include<iostream>
+using namespace std;
+struct congnhan {
+	string hoten;
+	int sosanpham[100];
+	float tb;
+};
+int main() {
+	struct congnhan ds[100];
+	int i, j, n, m;
+	cout << " nhap so cong nhan ";
+	cin >> n;
+	cout << " nhap so ngay lam viec ";
+	cin >> m;
+	for (i = 1;i <= n;i++) {
+		cout << " nhap ten cong nhan thu " << i<<" ";
+		cin >> ds[i].hoten;
+		for (j = 1;j <= m;j++) {
+			cout << " ngay thu " << j << " so san pham duoc lam ra la ";
+			cin >> ds[i].sosanpham[j];
+		}
+	}
+	for (i = 1;i <= n;i++) {
+		float s = 0;
+		for (j = 1;j <= m;j++) {
+			s = s + ds[i].sosanpham[j];
+		}
+		ds[i].tb = s / m;
+		cout << " gia tri trung binh cua cong nhan thu " << i << " la " << ds[i].tb<<endl;
+	}
+	float max = ds[1].tb;
+	for (i = 1;i <= n;i++){
+		if (ds[i].tb > max) {
+			max = ds[i].tb;
+			
+		}
+	}
+	cout << " nang suat lam viec lon nhat la " << max << endl;
+	for (i = 1;i <= n;i++) {
+		if (ds[i].tb == max) {
+			cout << " nguoi lam viec nhieu nhat la " << ds[i].hoten<<endl;
+		}
+	}
+	for (i = 1;i <= n;i++) {
+		for (j = i+1;j <=n;j++) {
+			if (ds[i].tb < ds[j].tb) {
+				struct congnhan tg;
+				tg = ds[i];
+				ds[i] = ds[j];
+				ds[j] = tg;
+			}
+		}
+	}
+	for (i = 1;i <= n;i++) {
+		cout << ds[i].hoten;
+		cout << " " << ds[i].tb<<endl;
+	}
+	
+}
