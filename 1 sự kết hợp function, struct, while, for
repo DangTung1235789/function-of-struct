@@ -1,0 +1,101 @@
+#include<iostream>
+using namespace std;
+struct sinhvien {
+	string hoten;
+	float diemthi[100];
+	float diemtrungbinh;
+};
+void nhapdl(struct sinhvien ds[100], int &n, int& m);
+void xuatdl(struct sinhvien ds[100], int n, int m);
+void trungbinh(struct sinhvien ds[100], int n, int m);
+void sapxep(struct sinhvien ds[100], int n, int m);
+void xuatdlsau(struct sinhvien ds[100], int n, int m);
+int main() {
+	int i, n, m;
+	struct sinhvien ds[100];
+	nhapdl(ds, n, m);
+	xuatdl(ds, n, m);
+	trungbinh(ds, n, m);
+	sapxep(ds, n, m);
+	xuatdlsau(ds, n, m);
+}
+void nhapdl(struct sinhvien ds[100], int& n, int& m) {
+	cout << " nhap so sinh vien ";
+	cin >> n;
+	cout << " nhap so mon ";
+	cin >> m;
+	int i;
+	int j;
+	i = 1;
+	
+	while(i<=n){
+		cout << " nhap ten sinh vien thu " << i << " la ";
+		cin >> ds[i].hoten;
+		j = 1;
+		while (j <= m) {
+			cout << " nhap diem mon thu " << j << " la ";
+			cin >> ds[i].diemthi[j];
+			j++;
+		}
+		i++;
+	}
+
+}
+void xuatdl(struct sinhvien ds[100], int n, int m) {
+	int i, j;
+	i = 1;
+	while (i <= n) {
+		cout << ds[i].hoten<<"  ";
+		j = 1;
+		while(j<=m){
+			cout << ds[i].diemthi[j] << "  ";
+			j++;
+		}
+		cout << endl;
+		i++;
+	}
+}
+void trungbinh(struct sinhvien ds[100], int n, int m) {
+	int i, j;
+	i = 1;
+	while (i <= n) {
+		ds[i].diemtrungbinh = 0;
+		j = 1;
+		while (j <= m) {
+			ds[i].diemtrungbinh = ds[i].diemtrungbinh + ds[i].diemthi[j];
+			j++;
+		}
+		cout << " diem trung binh cua sinh vien thu " << i << " la " << ds[i].diemtrungbinh/m << endl;
+		i++;
+	}
+}
+void sapxep(struct sinhvien ds[100], int n, int m) {
+	int i, j;
+	i = 1;
+	while (i <= n) {
+		j = i + 1;
+		while (j <= n) {
+			if (ds[i].diemtrungbinh > ds[j].diemtrungbinh) {
+				struct sinhvien tg;
+				tg = ds[i];
+				ds[i] = ds[j];
+				ds[j] = tg;
+				j++;
+			}
+		}
+		i++;
+	}
+	
+}
+void xuatdlsau(struct sinhvien ds[100], int n, int m) {
+	int i, j;
+	for (i = 1;i <= n;i++) {
+		cout << ds[i].hoten << " ";
+		for (j = 1;j <= m;j++) {
+			cout << ds[i].diemthi[j] << " ";
+		}
+		cout << " // ";
+		cout << ds[i].diemtrungbinh/m;
+		cout << endl;
+	}
+}
